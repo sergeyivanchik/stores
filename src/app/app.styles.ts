@@ -1,8 +1,11 @@
 import { createGlobalStyle } from 'styled-components';
+import { normalize } from 'polished';
 
 import { fontFamilies, colors } from '@/constants';
 
 const GlobalStyles = createGlobalStyle`
+  ${normalize()};
+  
   html,
   body {
     margin: 0;
