@@ -1,7 +1,14 @@
-import { FC } from "react";
+import { FC } from 'react';
+
+import { GlobalStyles } from './app.styles';
 
 const App: FC = () => {
-    return <div>App</div>
-}
+  return (
+    <>
+      <GlobalStyles />
+      App
+    </>
+  );
+};
 
-export { App }
+export { App };
