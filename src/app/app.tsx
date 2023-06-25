@@ -1,8 +1,6 @@
-import { FC } from 'react';
-
 import { GlobalStyles } from './app.styles';
 
-const App: FC = () => {
+const App = () => {
   return (
     <>
       <GlobalStyles />
