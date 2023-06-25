@@ -1,4 +1,4 @@
-import { Header } from '@/components';
+import { MainLayout } from '@/layouts';
 
 import { GlobalStyles } from './app.styles';
 
@@ -6,7 +6,7 @@ const App = () => {
   return (
     <>
       <GlobalStyles />
-      <Header />
+      <MainLayout>123123132</MainLayout>
     </>
   );
 };
