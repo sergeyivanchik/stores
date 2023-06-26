@@ -7,7 +7,7 @@ const HeaderStyled = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 200px;
+  min-height: 200px;
   background-color: ${colors.gray700};
 `;
 
