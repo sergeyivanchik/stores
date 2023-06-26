@@ -1,16 +1,37 @@
 import { FC } from 'react';
+import { shallow } from 'zustand/shallow';
+
+import { useTodos } from '@/stores/zustand';
 
 import { ITaskProps } from './task.types';
 
-import { BasketStyled, TaskStyled, TitleStyled } from './task.styles';
-import { Checkbox } from '@/components/task/components';
+import { Checkbox } from './components';
 
-const Task: FC<ITaskProps> = ({ completed, title }) => {
+import { BasketStyled, TaskStyled, TitleStyled } from './task.styles';
+
+const Task: FC<ITaskProps> = ({ completed, title, id }) => {
+  const { deleteTask, changeTask } = useTodos(
+    (state) => ({
+      deleteTask: state.deleteTask,
+      changeTask: state.changeTask,
+    }),
+    shallow
+  );
+
+  const handleDelete = () => {
+    deleteTask(id);
+  };
+  const handleChange = () => {
+    changeTask(id);
+  };
+
+  const hasCompletedMode = completed ? 'completed' : undefined;
+
   return (
     <TaskStyled>
-      <Checkbox onClick={() => console.log(1)} checked={completed} />
-      <TitleStyled>{title}</TitleStyled>
-      <BasketStyled />
+      <Checkbox onClick={handleChange} checked={completed} />
+      <TitleStyled modifiers={hasCompletedMode}>{title}</TitleStyled>
+      <BasketStyled onClick={handleDelete} />
     </TaskStyled>
   );
 };

@@ -1,5 +1,7 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { rgba } from 'polished';
+
+import { applyStyleModifiers } from '@/utils';
 
 import { colors } from '@/constants';
 import { ReactComponent as Basket } from '@/assets/icons/basket.svg';
@@ -21,10 +23,19 @@ const TaskStyled = styled.div`
   }
 `;
 
+const TITLE_MODIFIERS = {
+  completed: () => css`
+    color: ${colors.gray300};
+    text-decoration-line: line-through;
+  `,
+};
+
 const TitleStyled = styled.div<ITitleStyledProps>`
   color: ${colors.gray100};
   font-size: 14px;
   width: 100%;
+
+  ${applyStyleModifiers(TITLE_MODIFIERS)};
 `;
 
 const BasketStyled = styled(Basket)`
