@@ -4,7 +4,6 @@ const TasksStyled = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
-  padding-top: 90px;
 
   & > *:not(:last-child) {
     margin-bottom: 12px;

@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import { normalize } from 'polished';
 
 import { fontFamilies, colors } from '@/constants';
@@ -50,4 +50,13 @@ const GlobalStyles = createGlobalStyle`
   }
 `;
 
-export { GlobalStyles };
+const ContainerStyled = styled.div`
+  padding-top: 90px;
+  padding-bottom: 20px;
+
+  & > *:not(:last-child) {
+    margin-bottom: 25px;
+  }
+`;
+
+export { GlobalStyles, ContainerStyled };

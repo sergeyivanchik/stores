@@ -2,7 +2,7 @@ import { MainLayout } from '@/layouts';
 
 import { Form, Tasks } from '@/modules';
 
-import { GlobalStyles } from './app.styles';
+import { ContainerStyled, GlobalStyles } from './app.styles';
 
 const App = () => {
   return (
@@ -10,7 +10,9 @@ const App = () => {
       <GlobalStyles />
       <MainLayout>
         <Form />
-        <Tasks />
+        <ContainerStyled>
+          <Tasks />
+        </ContainerStyled>
       </MainLayout>
     </>
   );
