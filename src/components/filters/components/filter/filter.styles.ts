@@ -10,6 +10,7 @@ const FILTER_MODIFIERS = {
   active: () => css`
     pointer-events: none;
     color: ${colors.purple};
+    border-color: ${colors.purple};
   `,
 };
 
@@ -20,6 +21,13 @@ const FilterStyled = styled.div<IFilterStyledProps>`
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 5px;
+
+  &:hover {
+    color: ${colors.purple};
+    border-color: ${colors.purple};
+  }
 
   & > *:not(:last-child) {
     margin-right: 8px;
