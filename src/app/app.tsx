@@ -1,6 +1,6 @@
 import { MainLayout } from '@/layouts';
 
-import { Form } from '@/modules';
+import { Form, Tasks } from '@/modules';
 
 import { GlobalStyles } from './app.styles';
 
@@ -10,6 +10,7 @@ const App = () => {
       <GlobalStyles />
       <MainLayout>
         <Form />
+        <Tasks />
       </MainLayout>
     </>
   );
