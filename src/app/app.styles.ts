@@ -53,6 +53,9 @@ const GlobalStyles = createGlobalStyle`
 const ContainerStyled = styled.div`
   padding-top: 90px;
   padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 
   & > *:not(:last-child) {
     margin-bottom: 25px;

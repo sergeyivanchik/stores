@@ -4,7 +4,8 @@ import { devtools } from 'zustand/middleware';
 import { restApi } from '@/api';
 
 import { ITask } from '@/types';
-import { ITodoStore } from './store.types';
+import { IFiltersStore, ITodoStore } from './store.types';
+import { EFilters } from '@/enums';
 
 const useTodos = create<ITodoStore>()(
   devtools((set) => ({
@@ -59,4 +60,13 @@ const useTodos = create<ITodoStore>()(
   }))
 );
 
-export { useTodos };
+const useFilters = create<IFiltersStore>()(
+  devtools((set) => ({
+    filter: EFilters.all,
+    changeFilter: (filter) => {
+      set({ filter });
+    },
+  }))
+);
+
+export { useTodos, useFilters };

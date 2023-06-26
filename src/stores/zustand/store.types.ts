@@ -1,4 +1,5 @@
 import { ITask } from '@/types';
+import { EFilters } from '@/enums';
 
 interface ITodoStore {
   tasks: ITask[];
@@ -9,4 +10,9 @@ interface ITodoStore {
   createTask: (title: ITask['title']) => void;
 }
 
-export { ITodoStore };
+interface IFiltersStore {
+  filter: EFilters;
+  changeFilter: (value: EFilters) => void;
+}
+
+export { ITodoStore, IFiltersStore };
