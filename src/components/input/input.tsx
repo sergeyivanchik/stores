@@ -6,7 +6,7 @@ import { ErrorStyled, InputStyled, WrapperStyled } from './input.styles';
 
 const Input: FC<IInputProps> = ({
   className,
-  error,
+  error = '',
   onChange,
   value,
   placeholder,

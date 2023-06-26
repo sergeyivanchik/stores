@@ -2,7 +2,7 @@ interface IInputProps {
   value: string;
   onChange: (value: string) => void;
   placeholder: string;
-  error: string;
+  error?: string;
   disabled?: boolean;
   className?: string;
 }
