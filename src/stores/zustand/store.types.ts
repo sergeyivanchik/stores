@@ -15,4 +15,11 @@ interface IFiltersStore {
   changeFilter: (value: EFilters) => void;
 }
 
-export { ITodoStore, IFiltersStore };
+interface IInputStore {
+  value: string;
+  error: string;
+  setValue: (value: string) => void;
+  setError: (value: string) => void;
+}
+
+export { ITodoStore, IFiltersStore, IInputStore };

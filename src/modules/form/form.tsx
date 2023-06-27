@@ -1,6 +1,7 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
+import { shallow } from 'zustand/shallow';
 
-import { useTodos } from '@/stores/zustand';
+import { useInput, useTodos } from '@/stores/zustand';
 
 import { ReactComponent as Plus } from '@/assets/icons/plus.svg';
 
@@ -9,11 +10,16 @@ import { Button, Input } from '@/components';
 import { FormStyled } from './form.styles';
 
 const Form: FC = () => {
-  const [value, setValue] = useState('');
-  const [error, setError] = useState('');
-  const { createTask } = useTodos((state) => ({
-    createTask: state.createTask,
-  }));
+  const { value, error, setValue, setError } = useInput(
+    (state) => state,
+    shallow
+  );
+  const { createTask } = useTodos(
+    (state) => ({
+      createTask: state.createTask,
+    }),
+    shallow
+  );
 
   const handleClick = () => {
     if (!value) {
