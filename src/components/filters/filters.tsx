@@ -1,6 +1,8 @@
 import { FC } from 'react';
+//zustand
 import { shallow } from 'zustand/shallow';
 
+//zustand
 import { useTodos } from '@/stores/zustand';
 
 import { EFilters } from '@/enums';
@@ -11,6 +13,7 @@ import { Filter } from './components';
 import { FiltersStyled } from './filters.styles';
 
 const Filters: FC<FiltersProps> = ({ className }) => {
+  //zustand
   const { countAll, countCompleted, countUncompleted } = useTodos(
     (state) => ({
       countAll: state.tasks.length,

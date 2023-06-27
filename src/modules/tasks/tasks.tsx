@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
+//zustand
 import { shallow } from 'zustand/shallow';
 
+//zustand
 import { useFilters, useTodos } from '@/stores/zustand';
 
 import { EFilters } from '@/enums';
@@ -10,7 +12,9 @@ import { Empty, Loading, Task } from '@/components';
 import { FiltersStyled, TasksStyled } from './tasks.styles';
 
 const Tasks = () => {
+  //zustand
   const { filter } = useFilters((state) => ({ filter: state.filter }), shallow);
+  //zustand
   const { fetchTasks, loading } = useTodos(
     (state) => ({
       loading: state.loading,
@@ -18,6 +22,7 @@ const Tasks = () => {
     }),
     shallow
   );
+  //zustand
   const tasks = useTodos((state) => {
     switch (filter) {
       case EFilters.completed:
