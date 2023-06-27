@@ -1,9 +1,12 @@
-import { FC } from 'react';
 //zustand
-import { shallow } from 'zustand/shallow';
+// import { shallow } from 'zustand/shallow';
+//mobx
+import { observer } from 'mobx-react-lite';
 
 //zustand
-import { useInput, useTodos } from '@/stores/zustand';
+// import { useInput, useTodos } from '@/stores/zustand';
+//mobx
+import Store from '@/stores/mobx/store';
 
 import { ReactComponent as Plus } from '@/assets/icons/plus.svg';
 
@@ -11,19 +14,21 @@ import { Button, Input } from '@/components';
 
 import { FormStyled } from './form.styles';
 
-const Form: FC = () => {
+const Form = observer(() => {
   //zustand
-  const { value, error, setValue, setError } = useInput(
-    (state) => state,
-    shallow
-  );
+  // const { value, error, setValue, setError } = useInput(
+  //   (state) => state,
+  //   shallow
+  // );
   //zustand
-  const { createTask } = useTodos(
-    (state) => ({
-      createTask: state.createTask,
-    }),
-    shallow
-  );
+  // const { createTask } = useTodos(
+  //   (state) => ({
+  //     createTask: state.createTask,
+  //   }),
+  //   shallow
+  // );
+  //mobx
+  const { createTask, value, error, setValue, setError } = Store;
 
   const handleClick = () => {
     if (!value) {
@@ -51,6 +56,6 @@ const Form: FC = () => {
       </Button>
     </FormStyled>
   );
-};
+});
 
 export { Form };

@@ -1,9 +1,13 @@
 import { FC } from 'react';
 //zustand
-import { shallow } from 'zustand/shallow';
+// import { shallow } from 'zustand/shallow';
+//mobx
+import { observer } from 'mobx-react-lite';
 
 //zustand
-import { useTodos } from '@/stores/zustand';
+// import { useTodos } from '@/stores/zustand';
+//mobx
+import Store from '@/stores/mobx/store';
 
 import { ITaskProps } from './task.types';
 
@@ -11,15 +15,17 @@ import { Checkbox } from './components';
 
 import { BasketStyled, TaskStyled, TitleStyled } from './task.styles';
 
-const Task: FC<ITaskProps> = ({ completed, title, id }) => {
+const Task: FC<ITaskProps> = observer(({ completed, title, id }) => {
   //zustand
-  const { deleteTask, changeTask } = useTodos(
-    (state) => ({
-      deleteTask: state.deleteTask,
-      changeTask: state.changeTask,
-    }),
-    shallow
-  );
+  // const { deleteTask, changeTask } = useTodos(
+  //   (state) => ({
+  //     deleteTask: state.deleteTask,
+  //     changeTask: state.changeTask,
+  //   }),
+  //   shallow
+  // );
+  //mobx
+  const { deleteTask, changeTask } = Store;
 
   const handleDelete = () => {
     deleteTask(id);
@@ -37,6 +43,6 @@ const Task: FC<ITaskProps> = ({ completed, title, id }) => {
       <BasketStyled onClick={handleDelete} />
     </TaskStyled>
   );
-};
+});
 
 export { Task };

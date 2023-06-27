@@ -1,23 +1,29 @@
 import { FC } from 'react';
 //zustand
-import { shallow } from 'zustand/shallow';
+// import { shallow } from 'zustand/shallow';
+//mobx
+import { observer } from 'mobx-react-lite';
 
 //zustand
-import { useFilters } from '@/stores/zustand';
+// import { useFilters } from '@/stores/zustand';
+//mobx
+import Store from '@/stores/mobx/store';
 
 import { IFilterProps } from './filter.types';
 
 import { FilterStyled, CountStyled } from './filter.styles';
 
-const Filter: FC<IFilterProps> = ({ title, type, count }) => {
+const Filter: FC<IFilterProps> = observer(({ title, type, count }) => {
   //zustand
-  const { filter, changeFilter } = useFilters(
-    (state) => ({
-      filter: state.filter,
-      changeFilter: state.changeFilter,
-    }),
-    shallow
-  );
+  // const { filter, changeFilter } = useFilters(
+  //   (state) => ({
+  //     filter: state.filter,
+  //     changeFilter: state.changeFilter,
+  //   }),
+  //   shallow
+  // );
+  //mobx
+  const { filter, changeFilter } = Store;
 
   const handleClick = () => {
     changeFilter(type);
@@ -31,6 +37,6 @@ const Filter: FC<IFilterProps> = ({ title, type, count }) => {
       <CountStyled>{count}</CountStyled>
     </FilterStyled>
   );
-};
+});
 
 export { Filter };
