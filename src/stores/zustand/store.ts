@@ -7,6 +7,20 @@ import { ITask } from '@/types';
 import { EFilters } from '@/enums';
 import { IFiltersStore, IInputStore, ITodoStore } from './store.types';
 
+const useInput = create<IInputStore>()(
+  devtools((set, get) => ({
+    value: '',
+    error: '',
+    setValue: (value) => {
+      if (!!get().error) set({ error: '' });
+      set({ value });
+    },
+    setError: (error) => {
+      set({ error });
+    },
+  }))
+);
+
 const useTodos = create<ITodoStore>()(
   devtools((set) => ({
     tasks: [],
@@ -45,16 +59,22 @@ const useTodos = create<ITodoStore>()(
         console.error(error);
       }
     },
-    createTask: async (title) => {
-      try {
-        const { data: task } = await restApi.post<ITask>('todos', {
-          title,
-          completed: false,
-        });
+    createTask: async () => {
+      const { value, setError } = useInput();
 
-        set((state) => ({ tasks: [task, ...state.tasks] }));
-      } catch (error) {
-        console.error(error);
+      if (!!value) {
+        try {
+          const { data: task } = await restApi.post<ITask>('todos', {
+            title: value,
+            completed: false,
+          });
+
+          set((state) => ({ tasks: [task, ...state.tasks] }));
+        } catch (error) {
+          console.error(error);
+        }
+      } else {
+        setError('Please fill in the field');
       }
     },
   }))
@@ -65,19 +85,6 @@ const useFilters = create<IFiltersStore>()(
     filter: EFilters.all,
     changeFilter: (filter) => {
       set({ filter });
-    },
-  }))
-);
-
-const useInput = create<IInputStore>()(
-  devtools((set) => ({
-    value: '',
-    error: '',
-    setValue: (value) => {
-      set({ value });
-    },
-    setError: (error) => {
-      set({ error });
     },
   }))
 );

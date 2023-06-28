@@ -7,7 +7,7 @@ interface ITodoStore {
   fetchTasks: () => void;
   deleteTask: (id: ITask['id']) => void;
   changeTask: (id: ITask['id']) => void;
-  createTask: (title: ITask['title']) => void;
+  createTask: () => void;
 }
 
 interface IFiltersStore {
