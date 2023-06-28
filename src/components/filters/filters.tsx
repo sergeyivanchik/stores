@@ -3,11 +3,19 @@ import { FC } from 'react';
 // import { shallow } from 'zustand/shallow';
 //mobx
 import { observer } from 'mobx-react-lite';
+//redux
+import { useSelector } from 'react-redux';
 
 //zustand
 // import { useTodos } from '@/stores/zustand';
 //mobx
-import Store from '@/stores/mobx/store';
+// import Store from '@/stores/mobx/store';
+//redux
+import {
+  getTasks,
+  getCompletedTasks,
+  getUncompletedTasks,
+} from '@/stores/redux';
 
 import { EFilters } from '@/enums';
 import { FiltersProps } from './filters.types';
@@ -27,11 +35,17 @@ const Filters: FC<FiltersProps> = observer(({ className }) => {
   //   }),
   //   shallow
   // );
+
   //mobx
-  const { tasks, completedTasks, uncompletedTasks } = Store;
-  const countAll = tasks.length;
-  const countCompleted = completedTasks.length;
-  const countUncompleted = uncompletedTasks.length;
+  // const { tasks, completedTasks, uncompletedTasks } = Store;
+  // const countAll = tasks.length;
+  // const countCompleted = completedTasks.length;
+  // const countUncompleted = uncompletedTasks.length;
+
+  //redux
+  const countAll = useSelector(getTasks).length;
+  const countCompleted = useSelector(getCompletedTasks).length;
+  const countUncompleted = useSelector(getUncompletedTasks).length;
 
   return (
     <FiltersStyled className={className}>

@@ -3,11 +3,16 @@ import { FC } from 'react';
 // import { shallow } from 'zustand/shallow';
 //mobx
 import { observer } from 'mobx-react-lite';
+//redux
+import { useSelector } from 'react-redux';
 
 //zustand
 // import { useFilters } from '@/stores/zustand';
 //mobx
-import Store from '@/stores/mobx/store';
+// import Store from '@/stores/mobx/store';
+//redux
+import { useActions } from '@/hooks';
+import { getFilter } from '@/stores/redux';
 
 import { IFilterProps } from './filter.types';
 
@@ -22,8 +27,13 @@ const Filter: FC<IFilterProps> = observer(({ title, type, count }) => {
   //   }),
   //   shallow
   // );
+
   //mobx
-  const { filter, changeFilter } = Store;
+  // const { filter, changeFilter } = Store;
+
+  //redux
+  const filter = useSelector(getFilter);
+  const { changeFilter } = useActions();
 
   const handleClick = () => {
     changeFilter(type);

@@ -7,7 +7,9 @@ import { observer } from 'mobx-react-lite';
 //zustand
 // import { useTodos } from '@/stores/zustand';
 //mobx
-import Store from '@/stores/mobx/store';
+// import Store from '@/stores/mobx/store';
+//redux
+import { useActions } from '@/hooks';
 
 import { ITaskProps } from './task.types';
 
@@ -24,8 +26,12 @@ const Task: FC<ITaskProps> = observer(({ completed, title, id }) => {
   //   }),
   //   shallow
   // );
+
   //mobx
-  const { deleteTask, changeTask } = Store;
+  // const { deleteTask, changeTask } = Store;
+
+  //redux
+  const { deleteTask, changeTask } = useActions();
 
   const handleDelete = () => {
     deleteTask(id);

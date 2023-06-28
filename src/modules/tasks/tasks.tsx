@@ -3,11 +3,16 @@ import { useEffect } from 'react';
 // import { shallow } from 'zustand/shallow';
 //mobx
 import { observer } from 'mobx-react-lite';
+//redux
+import { useSelector } from 'react-redux';
 
 //zustand
 // import { useFilters, useTodos } from '@/stores/zustand';
 //mobx
-import Store from '@/stores/mobx/store';
+// import Store from '@/stores/mobx/store';
+//redux
+import { getFilteredTasks, getLoading } from '@/stores/redux';
+import { useActions } from '@/hooks';
 
 //zustand
 // import { EFilters } from '@/enums';
@@ -19,7 +24,6 @@ import { FiltersStyled, TasksStyled } from './tasks.styles';
 const Tasks = observer(() => {
   //zustand
   // const { filter } = useFilters((state) => ({ filter: state.filter }), shallow);
-  //zustand
   // const { fetchTasks, loading } = useTodos(
   //   (state) => ({
   //     loading: state.loading,
@@ -27,7 +31,6 @@ const Tasks = observer(() => {
   //   }),
   //   shallow
   // );
-  //zustand
   // const tasks = useTodos((state) => {
   //   switch (filter) {
   //     case EFilters.completed:
@@ -40,7 +43,12 @@ const Tasks = observer(() => {
   // }, shallow);
 
   //mobx
-  const { fetchTasks, loading, currentTasks: tasks } = Store;
+  // const { loading, currentTasks: tasks } = Store;
+
+  //redux
+  const { fetchTasks } = useActions();
+  const tasks = useSelector(getFilteredTasks);
+  const loading = useSelector(getLoading);
 
   useEffect(() => {
     fetchTasks();

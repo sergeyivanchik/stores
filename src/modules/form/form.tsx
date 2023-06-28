@@ -2,11 +2,16 @@
 // import { shallow } from 'zustand/shallow';
 //mobx
 import { observer } from 'mobx-react-lite';
+//redux
+import { useSelector } from 'react-redux';
 
 //zustand
 // import { useInput, useTodos } from '@/stores/zustand';
 //mobx
-import Store from '@/stores/mobx/store';
+// import Store from '@/stores/mobx/store';
+//redux
+import { useActions } from '@/hooks';
+import { getError, getValue } from '@/stores/redux';
 
 import { ReactComponent as Plus } from '@/assets/icons/plus.svg';
 
@@ -20,15 +25,20 @@ const Form = observer(() => {
   //   (state) => state,
   //   shallow
   // );
-  //zustand
   // const { createTask } = useTodos(
   //   (state) => ({
   //     createTask: state.createTask,
   //   }),
   //   shallow
   // );
+
   //mobx
-  const { createTask, value, error, setValue } = Store;
+  // const { createTask, value, error, setValue } = Store;
+
+  //redux
+  const { createTask, setValue } = useActions();
+  const error = useSelector(getError);
+  const value = useSelector(getValue);
 
   const handleChange = (value: string) => {
     setValue(value);
