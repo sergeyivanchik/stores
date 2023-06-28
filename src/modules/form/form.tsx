@@ -28,19 +28,10 @@ const Form = observer(() => {
   //   shallow
   // );
   //mobx
-  const { createTask, value, error, setValue, setError } = Store;
+  const { createTask, value, error, setValue } = Store;
 
-  const handleClick = () => {
-    if (!value) {
-      setError('Please fill in the field');
-    } else {
-      createTask(value);
-      setValue('');
-    }
-  };
   const handleChange = (value: string) => {
     setValue(value);
-    !!error && setError('');
   };
 
   return (
@@ -51,7 +42,7 @@ const Form = observer(() => {
         placeholder="Enter task"
         error={error}
       />
-      <Button title="Add" onClick={handleClick}>
+      <Button title="Add" onClick={createTask}>
         <Plus />
       </Button>
     </FormStyled>

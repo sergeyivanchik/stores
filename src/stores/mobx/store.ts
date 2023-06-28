@@ -69,20 +69,26 @@ class Store {
     }
   };
 
-  createTask = async (title: ITask['title']) => {
-    try {
-      const { data: task } = await restApi.post<ITask>('todos', {
-        title,
-        completed: false,
-      });
+  createTask = async () => {
+    if (!!this.value) {
+      try {
+        const { data: task } = await restApi.post<ITask>('todos', {
+          title: this.value,
+          completed: false,
+        });
 
-      this.tasks = [task, ...this.tasks];
-    } catch (error) {
-      console.error(error);
+        this.tasks = [task, ...this.tasks];
+        this.value = '';
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      this.setError('Please fill in the field');
     }
   };
 
   setValue = (value: string) => {
+    if (this.error) this.error = '';
     this.value = value;
   };
 
