@@ -50,6 +50,7 @@ const Tasks = observer(() => {
   const tasks = useSelector(getFilteredTasks);
   const loading = useSelector(getLoading);
 
+  //redux
   useEffect(() => {
     fetchTasks();
   }, []);

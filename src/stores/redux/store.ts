@@ -1,24 +1,33 @@
 import { configureStore } from '@reduxjs/toolkit';
-import createSagaMiddleware from 'redux-saga';
+//saga
+// import createSagaMiddleware from 'redux-saga';
 
-import { reducer as tasksReducer, actions } from './slice';
-import { rootSaga } from './sagas';
+import { reducer as tasksReducer, actions as sagaActions } from './slice';
+//saga
+// import { rootSaga } from './sagas';
+//thunk
+import * as thunkActions from './actions';
 
-const sagaMiddleware = createSagaMiddleware();
+//saga
+// const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({
   reducer: {
     tasks: tasksReducer,
   },
-  middleware: (getDefault) => getDefault().concat(sagaMiddleware),
+  //saga
+  // middleware: (getDefault) => getDefault().concat(sagaMiddleware),
 });
-
-sagaMiddleware.run(rootSaga);
+//saga
+// sagaMiddleware.run(rootSaga);
 
 type TStore = ReturnType<typeof store.getState>;
 
 const allActions = {
-  ...actions,
+  //saga
+  ...sagaActions,
+  //thunk
+  ...thunkActions,
 };
 
 export { store, TStore, allActions };
