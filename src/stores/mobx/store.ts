@@ -7,7 +7,7 @@ import { EFilters } from '@/enums';
 
 class Store {
   tasks: ITask[] = [];
-  loading: boolean = false;
+  loading: boolean = true;
   filter: EFilters = EFilters.all;
   value: string = '';
   error: string = '';
@@ -59,7 +59,7 @@ class Store {
 
   changeTask = async (task: ITask) => {
     try {
-      await restApi.put(`todos/${task.id}`);
+      await restApi.put(`todos/${task.id}`, task);
 
       this.tasks = this.tasks.map((t) =>
         t.id === task.id ? { ...t, completed: !t.completed } : t
