@@ -9,7 +9,7 @@ import { observer } from 'mobx-react-lite';
 //zustand
 // import { useTodos } from '@/stores/zustand';
 //mobx
-// import Store from '@/stores/mobx/store';
+import Store from '@/stores/mobx/store';
 //redux
 // import {
 //   getTasks,
@@ -17,7 +17,7 @@ import { observer } from 'mobx-react-lite';
 //   getUncompletedTasks,
 // } from '@/stores/redux';
 //rtkquery
-import { useGetTasksQuery } from '@/stores/redux/rtk-query';
+// import { useGetTasksQuery } from '@/stores/redux/rtk-query';
 
 import { EFilters } from '@/enums';
 import { FiltersProps } from './filters.types';
@@ -39,10 +39,10 @@ const Filters: FC<FiltersProps> = observer(({ className }) => {
   // );
 
   //mobx
-  // const { tasks, completedTasks, uncompletedTasks } = Store;
-  // const countAll = tasks.length;
-  // const countCompleted = completedTasks.length;
-  // const countUncompleted = uncompletedTasks.length;
+  const { tasks, completedTasks, uncompletedTasks } = Store;
+  const countAll = tasks.length;
+  const countCompleted = completedTasks.length;
+  const countUncompleted = uncompletedTasks.length;
 
   //redux
   // const countAll = useSelector(getTasks).length;
@@ -50,10 +50,10 @@ const Filters: FC<FiltersProps> = observer(({ className }) => {
   // const countUncompleted = useSelector(getUncompletedTasks).length;
 
   //rtkquery
-  const { data: tasks = [] } = useGetTasksQuery(null);
-  const countAll = tasks.length;
-  const countCompleted = tasks.filter(({ completed }) => completed).length;
-  const countUncompleted = tasks.filter(({ completed }) => !completed).length;
+  // const { data: tasks = [] } = useGetTasksQuery(null);
+  // const countAll = tasks.length;
+  // const countCompleted = tasks.filter(({ completed }) => completed).length;
+  // const countUncompleted = tasks.filter(({ completed }) => !completed).length;
 
   return (
     <FiltersStyled className={className}>

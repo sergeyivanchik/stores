@@ -3,17 +3,17 @@
 //mobx
 import { observer } from 'mobx-react-lite';
 //redux
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 //zustand
 // import { useInput, useTodos } from '@/stores/zustand';
 //mobx
-// import Store from '@/stores/mobx/store';
+import Store from '@/stores/mobx/store';
 //redux && rtkQuery
-import { useActions } from '@/hooks';
-import { getError, getValue } from '@/stores/redux';
+// import { useActions } from '@/hooks';
+// import { getError, getValue } from '@/stores/redux';
 //rtkQuery
-import { useCreateTaskMutation } from '@/stores/redux/rtk-query';
+// import { useCreateTaskMutation } from '@/stores/redux/rtk-query';
 
 import { ReactComponent as Plus } from '@/assets/icons/plus.svg';
 
@@ -35,24 +35,24 @@ const Form = observer(() => {
   // );
 
   //mobx
-  // const { createTask, value, error, setValue } = Store;
+  const { createTask, value, error, setValue } = Store;
 
-  const {
-    //redux
-    // createTask,
-    setValue,
-    setError,
-  } = useActions();
-  const error = useSelector(getError);
-  const value = useSelector(getValue);
+  // const {
+  //redux
+  // createTask,
+  //   setValue,
+  //   setError,
+  // } = useActions();
+  // const error = useSelector(getError);
+  // const value = useSelector(getValue);
 
   //rtkquery
-  const [createTaskMutation] = useCreateTaskMutation();
-  const createTask = () => {
-    if (!value) {
-      setError('Please fill in the field');
-    } else createTaskMutation(value);
-  };
+  // const [createTaskMutation] = useCreateTaskMutation();
+  // const createTask = () => {
+  //   if (!value) {
+  //     setError('Please fill in the field');
+  //   } else createTaskMutation(value);
+  // };
 
   const handleChange = (value: string) => {
     setValue(value);

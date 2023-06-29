@@ -1,25 +1,25 @@
 //not rtkquery
-// import { useEffect } from 'react';
+import { useEffect } from 'react';
 //zustand
 // import { shallow } from 'zustand/shallow';
 //mobx
 import { observer } from 'mobx-react-lite';
 //redux && rtkquery
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 //zustand
 // import { useFilters, useTodos } from '@/stores/zustand';
 //mobx
-// import Store from '@/stores/mobx/store';
+import Store from '@/stores/mobx/store';
 //redux
 // import { getFilteredTasks, getLoading } from '@/stores/redux';
 // import { useActions } from '@/hooks';
 //rtkquery
-import { getFilter } from '@/stores/redux';
-import { useGetTasksQuery } from '@/stores/redux/rtk-query';
+// import { getFilter } from '@/stores/redux';
+// import { useGetTasksQuery } from '@/stores/redux/rtk-query';
 
 //zustand && rtkquery
-import { EFilters } from '@/enums';
+// import { EFilters } from '@/enums';
 
 import { Empty, Loading, Task } from '@/components';
 
@@ -47,26 +47,26 @@ const Tasks = observer(() => {
   // }, shallow);
 
   //mobx
-  // const { loading, currentTasks: tasks } = Store;
+  const { loading, currentTasks: tasks, fetchTasks } = Store;
 
   //redux
   // const { fetchTasks } = useActions();
   // const tasks = useSelector(getFilteredTasks);
   // const loading = useSelector(getLoading);
   //rtkquery
-  const { data = [], isLoading: loading } = useGetTasksQuery(null);
-  const filter = useSelector(getFilter);
-  const tasks =
-    EFilters.completed === filter
-      ? data.filter(({ completed }) => completed)
-      : (EFilters.uncompleted === filter &&
-          data.filter(({ completed }) => !completed)) ||
-        data;
+  // const { data = [], isLoading: loading } = useGetTasksQuery(null);
+  // const filter = useSelector(getFilter);
+  // const tasks =
+  //   EFilters.completed === filter
+  //     ? data.filter(({ completed }) => completed)
+  //     : (EFilters.uncompleted === filter &&
+  //         data.filter(({ completed }) => !completed)) ||
+  //       data;
 
-  //redux
-  // useEffect(() => {
-  //   fetchTasks();
-  // }, []);
+  // redux;
+  useEffect(() => {
+    fetchTasks();
+  }, []);
 
   const hasLoading = loading && <Loading />;
   const hasTasks =
