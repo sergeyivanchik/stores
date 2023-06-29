@@ -6,7 +6,7 @@ interface ITodoStore {
   loading: boolean;
   fetchTasks: () => void;
   deleteTask: (id: ITask['id']) => void;
-  changeTask: (id: ITask['id']) => void;
+  changeTask: (task: ITask) => void;
   createTask: () => void;
 }
 

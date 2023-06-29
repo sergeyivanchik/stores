@@ -34,13 +34,13 @@ const deleteTask = createAsyncThunk<number, ITask['id']>(
   }
 );
 
-const changeTask = createAsyncThunk<ITask['id'], ITask['id']>(
+const changeTask = createAsyncThunk<ITask['id'], ITask>(
   'tasks/changeTask',
-  async (id, thunkAPI) => {
+  async (task, thunkAPI) => {
     try {
-      await restApi.put(`todos/${id}`);
+      await restApi.put(`todos/${task.id}`, task);
 
-      return id;
+      return task.id;
     } catch (error) {
       console.error(error);
 

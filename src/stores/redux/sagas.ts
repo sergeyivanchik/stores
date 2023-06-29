@@ -33,16 +33,16 @@
 // }
 //
 // function* changeTaskWorker({
-//   payload: id,
+//   payload: task,
 // }: ReturnType<typeof actions.changeTask>) {
 //   const tasks: ReturnType<typeof getTasks> = yield select(getTasks);
 //
 //   try {
-//     yield changeTaskApi(id);
+//     yield changeTaskApi(task);
 //
 //     yield put(
 //       actions.setTasks(
-//         tasks.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t))
+//         tasks.map((t) => (t.id === task.id ? { ...t, completed: !t.completed } : t))
 //       )
 //     );
 //   } catch (error) {

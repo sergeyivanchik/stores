@@ -57,12 +57,12 @@ class Store {
     }
   };
 
-  changeTask = async (id: ITask['id']) => {
+  changeTask = async (task: ITask) => {
     try {
-      await restApi.put(`todos/${id}`);
+      await restApi.put(`todos/${task.id}`);
 
       this.tasks = this.tasks.map((t) =>
-        t.id === id ? { ...t, completed: !t.completed } : t
+        t.id === task.id ? { ...t, completed: !t.completed } : t
       );
     } catch (error) {
       console.error(error);

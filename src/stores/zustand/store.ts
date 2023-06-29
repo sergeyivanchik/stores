@@ -46,13 +46,13 @@ const useTodos = create<ITodoStore>()(
         console.error(error);
       }
     },
-    changeTask: async (id) => {
+    changeTask: async (task) => {
       try {
-        await restApi.put(`todos/${id}`);
+        await restApi.put(`todos/${task.id}`);
 
         set((state) => ({
           tasks: state.tasks.map((t) =>
-            t.id === id ? { ...t, completed: !t.completed } : t
+            t.id === task.id ? { ...t, completed: !t.completed } : t
           ),
         }));
       } catch (error) {

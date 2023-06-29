@@ -22,8 +22,8 @@
 //   await restApi.delete(`todos/${id}`);
 // };
 //
-// const changeTaskApi = async (id: ITask['id']) => {
-//   await restApi.put(`todos/${id}`);
+// const changeTaskApi = async (task: ITask) => {
+//   await restApi.put(`todos/${id}`, task);
 // };
 //
 // export { fetchTasksApi, createTaskApi, deleteTaskApi, changeTaskApi };
