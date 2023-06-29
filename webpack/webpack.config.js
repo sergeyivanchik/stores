@@ -10,6 +10,9 @@ const svg = require('./loaders/svg.loader');
 
 const pkg = require('../package.json');
 
+const isDev = process.env.NODE_ENV === 'development';
+const isProd = !isDev;
+
 module.exports = {
   mode: 'development',
   entry: './src/index.tsx',
@@ -31,11 +34,14 @@ module.exports = {
   plugins: [
     new HtmlWebPackPlugin({
       template: './public/index.html',
+      minify: {
+        collapseWhitespace: isProd,
+      },
     }),
     new Dotenv(),
   ],
   devServer: {
-    hot: true,
+    hot: isDev,
     historyApiFallback: true,
     open: true,
     port: 3000,
