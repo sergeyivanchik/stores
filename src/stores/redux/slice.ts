@@ -1,11 +1,16 @@
-import { createAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
-//thunk
 import {
-  fetchTasks,
-  deleteTask,
-  changeTask,
-  createTask,
-} from '@/stores/redux/actions';
+  //saga
+  // createAction,
+  createSlice,
+  PayloadAction,
+} from '@reduxjs/toolkit';
+//thunk
+// import {
+//   fetchTasks,
+//   deleteTask,
+//   changeTask,
+//   createTask,
+// } from '@/stores/redux/actions';
 
 import { TASKS_SLICE } from './constants';
 import { EFilters } from '@/enums';
@@ -37,10 +42,10 @@ const tasksSlice = createSlice({
       if (!!state.error) state.error = '';
       state.value = payload;
     },
-    //saga
-    // setError: (state, { payload }: PayloadAction<ITasksState['error']>) => {
-    //   state.error = payload;
-    // },
+    //saga && rtkquery
+    setError: (state, { payload }: PayloadAction<ITasksState['error']>) => {
+      state.error = payload;
+    },
     changeFilter: (state, { payload }: PayloadAction<EFilters>) => {
       state.filter = payload;
     },
@@ -54,33 +59,33 @@ const tasksSlice = createSlice({
     // },
   },
   //thunk
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchTasks.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(fetchTasks.fulfilled, (state, { payload }) => {
-        state.data = payload;
-        state.loading = false;
-      })
-      .addCase(fetchTasks.rejected, (state) => {
-        state.loading = false;
-      })
-      .addCase(deleteTask.fulfilled, (state, { payload }) => {
-        state.data = state.data.filter(({ id }) => id !== payload);
-      })
-      .addCase(changeTask.fulfilled, (state, { payload }) => {
-        state.data = state.data.map((t) =>
-          t.id === payload ? { ...t, completed: !t.completed } : t
-        );
-      })
-      .addCase(createTask.fulfilled, (state, { payload }) => {
-        state.data = [payload, ...state.data];
-      })
-      .addCase(createTask.rejected, (state, { payload }) => {
-        if (payload === 'Please fill in the field') state.error = payload;
-      });
-  },
+  // extraReducers: (builder) => {
+  //   builder
+  //     .addCase(fetchTasks.pending, (state) => {
+  //       state.loading = true;
+  //     })
+  //     .addCase(fetchTasks.fulfilled, (state, { payload }) => {
+  //       state.data = payload;
+  //       state.loading = false;
+  //     })
+  //     .addCase(fetchTasks.rejected, (state) => {
+  //       state.loading = false;
+  //     })
+  //     .addCase(deleteTask.fulfilled, (state, { payload }) => {
+  //       state.data = state.data.filter(({ id }) => id !== payload);
+  //     })
+  //     .addCase(changeTask.fulfilled, (state, { payload }) => {
+  //       state.data = state.data.map((t) =>
+  //         t.id === payload ? { ...t, completed: !t.completed } : t
+  //       );
+  //     })
+  //     .addCase(createTask.fulfilled, (state, { payload }) => {
+  //       state.data = [payload, ...state.data];
+  //     })
+  //     .addCase(createTask.rejected, (state, { payload }) => {
+  //       if (payload === 'Please fill in the field') state.error = payload;
+  //     });
+  // },
 });
 
 const actions = {

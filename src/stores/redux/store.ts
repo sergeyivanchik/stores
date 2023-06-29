@@ -7,6 +7,12 @@ import { reducer as tasksReducer, actions as sagaActions } from './slice';
 // import { rootSaga } from './sagas';
 //thunk
 import * as thunkActions from './actions';
+//rtkquery
+import {
+  reducer as rtkqueryReducer,
+  reducerPath,
+  middleware as rtkqueryMiddleware,
+} from './rtk-query';
 
 //saga
 // const sagaMiddleware = createSagaMiddleware();
@@ -14,9 +20,14 @@ import * as thunkActions from './actions';
 const store = configureStore({
   reducer: {
     tasks: tasksReducer,
+    //rtkquery
+    [reducerPath]: rtkqueryReducer,
   },
   //saga
   // middleware: (getDefault) => getDefault().concat(sagaMiddleware),
+  //rtkquery
+  middleware: (getDefault) => getDefault().concat(rtkqueryMiddleware),
+  devTools: true,
 });
 //saga
 // sagaMiddleware.run(rootSaga);

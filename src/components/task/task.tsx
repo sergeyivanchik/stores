@@ -9,7 +9,12 @@ import { observer } from 'mobx-react-lite';
 //mobx
 // import Store from '@/stores/mobx/store';
 //redux
-import { useActions } from '@/hooks';
+// import { useActions } from '@/hooks';
+//rtkquery
+import {
+  useDeleteTaskMutation,
+  useChangeTaskMutation,
+} from '@/stores/redux/rtk-query';
 
 import { ITaskProps } from './task.types';
 
@@ -31,13 +36,17 @@ const Task: FC<ITaskProps> = observer(({ completed, title, id }) => {
   // const { deleteTask, changeTask } = Store;
 
   //redux
-  const { deleteTask, changeTask } = useActions();
+  // const { deleteTask, changeTask } = useActions();
+
+  //rtkquery
+  const [deleteTask] = useDeleteTaskMutation();
+  const [changeTask] = useChangeTaskMutation();
 
   const handleDelete = () => {
     deleteTask(id);
   };
   const handleChange = () => {
-    changeTask(id);
+    changeTask({ id, title, completed: !completed });
   };
 
   const hasCompletedMode = completed ? 'completed' : undefined;

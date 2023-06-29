@@ -1,9 +1,10 @@
-import { useEffect } from 'react';
+//not rtkquery
+// import { useEffect } from 'react';
 //zustand
 // import { shallow } from 'zustand/shallow';
 //mobx
 import { observer } from 'mobx-react-lite';
-//redux
+//redux && rtkquery
 import { useSelector } from 'react-redux';
 
 //zustand
@@ -11,11 +12,14 @@ import { useSelector } from 'react-redux';
 //mobx
 // import Store from '@/stores/mobx/store';
 //redux
-import { getFilteredTasks, getLoading } from '@/stores/redux';
-import { useActions } from '@/hooks';
+// import { getFilteredTasks, getLoading } from '@/stores/redux';
+// import { useActions } from '@/hooks';
+//rtkquery
+import { getFilter } from '@/stores/redux';
+import { useGetTasksQuery } from '@/stores/redux/rtk-query';
 
-//zustand
-// import { EFilters } from '@/enums';
+//zustand && rtkquery
+import { EFilters } from '@/enums';
 
 import { Empty, Loading, Task } from '@/components';
 
@@ -46,14 +50,23 @@ const Tasks = observer(() => {
   // const { loading, currentTasks: tasks } = Store;
 
   //redux
-  const { fetchTasks } = useActions();
-  const tasks = useSelector(getFilteredTasks);
-  const loading = useSelector(getLoading);
+  // const { fetchTasks } = useActions();
+  // const tasks = useSelector(getFilteredTasks);
+  // const loading = useSelector(getLoading);
+  //rtkquery
+  const { data = [], isLoading: loading } = useGetTasksQuery(null);
+  const filter = useSelector(getFilter);
+  const tasks =
+    EFilters.completed === filter
+      ? data.filter(({ completed }) => completed)
+      : (EFilters.uncompleted === filter &&
+          data.filter(({ completed }) => !completed)) ||
+        data;
 
   //redux
-  useEffect(() => {
-    fetchTasks();
-  }, []);
+  // useEffect(() => {
+  //   fetchTasks();
+  // }, []);
 
   const hasLoading = loading && <Loading />;
   const hasTasks =

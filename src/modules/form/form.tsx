@@ -9,9 +9,11 @@ import { useSelector } from 'react-redux';
 // import { useInput, useTodos } from '@/stores/zustand';
 //mobx
 // import Store from '@/stores/mobx/store';
-//redux
+//redux && rtkQuery
 import { useActions } from '@/hooks';
 import { getError, getValue } from '@/stores/redux';
+//rtkQuery
+import { useCreateTaskMutation } from '@/stores/redux/rtk-query';
 
 import { ReactComponent as Plus } from '@/assets/icons/plus.svg';
 
@@ -35,10 +37,22 @@ const Form = observer(() => {
   //mobx
   // const { createTask, value, error, setValue } = Store;
 
-  //redux
-  const { createTask, setValue } = useActions();
+  const {
+    //redux
+    // createTask,
+    setValue,
+    setError,
+  } = useActions();
   const error = useSelector(getError);
   const value = useSelector(getValue);
+
+  //rtkquery
+  const [createTaskMutation] = useCreateTaskMutation();
+  const createTask = () => {
+    if (!value) {
+      setError('Please fill in the field');
+    } else createTaskMutation(value);
+  };
 
   const handleChange = (value: string) => {
     setValue(value);
